@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Processing Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5; /* Light background for a fresh look */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333; /* Dark text for contrast */
+        }
+        .container {
+            margin-top: 50px;
+            width: 6000px;
+        }
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #007bff; /* Blue accent */
+        }
+        .header p {
+            font-size: 1.125rem;
+            color: #6c757d; /* Gray text */
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff; /* White card background for a clean look */
+            color: #333; /* Dark text in card */
+        }
+        .card-header {
+            background-color: #007bff; /* Bright blue header */
+            color: #ffffff;
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn-primary {
+            background-color: #28a745; /* Green button */
+            border: none;
+            border-radius: .25rem;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Gray button */
+            border: none;
+            border-radius: .25rem;
+            padding: 10px 20px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker gray on hover */
+        }
+        .table {
+            border-radius: 1rem;
+            background-color: #ffffff; /* White table background */
+            color: #333; /* Dark text in table */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            min-width: 100%; /* Ensure table takes up full width */
+        }
+        .table thead th {
+            background-color: #007bff; /* Blue header for the table */
+            color: #ffffff;
+        }
+        .table tbody tr:nth-of-type(even) {
+            background-color: #f2f2f2; /* Light gray for even rows */
+        }
+        .table tbody tr:nth-of-type(odd) {
+            background-color: #ffffff; /* White for odd rows */
+        }
+        .highlight-red {
+            background-color: #ffcccc; /* Light red for prediction = 1 */
+        }
+        .pagination {
+            justify-content: center;
+        }
+        .page-item.active .page-link {
+            background-color: #007bff; /* Blue background */
+            border-color: #007bff;
+        }
+        .page-link {
+            color: #333; /* Dark text color for links */
+        }
+        .page-link:hover {
+            color: #007bff; /* Blue text on hover */
+        }
+        .btn {
+            font-size: 1rem;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-chart-line"></i> Data Processing Results</h1>
+            <p>View your data processing results here</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-table"></i> Results Table
+            </div>
+            <div class="card-body">
+                {% if tables %}
+                    <div class="table-responsive">
+                        <!-- Display the table -->
+                        {{ tables|safe }}
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination mt-4">
+                            {% if page > 1 %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('index', page=1, per_page=per_page) }}" aria-label="First">
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('index', page=page-1, per_page=per_page) }}" aria-label="Previous">
+                                        <i class="fas fa-angle-left"></i>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="First">
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <i class="fas fa-angle-left"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            
+                            {% for p in range(1, pages + 1) %}
+                                {% if p == 1 or p == pages or (page - 2 <= p <= page + 2) %}
+                                    <li class="page-item {{ 'active' if p == page else '' }}">
+                                        <a class="page-link" href="{{ url_for('index', page=p, per_page=per_page) }}">{{ p }}</a>
+                                    </li>
+                                {% elif p == 2 or p == pages - 1 %}
+                                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if page < pages %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('index', page=page+1, per_page=per_page) }}" aria-label="Next">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('index', page=pages, per_page=per_page) }}" aria-label="Last">
+                                        <i class="fas fa-angle-double-right"></i>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="Last">
+                                        <i class="fas fa-angle-double-right"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% else %}
+                    <p class="text-center">No results to display.</p>
+                {% endif %}
+                <div class="text-center mt-4">
+                    <a href="/home" class="btn btn-secondary"><i class="fas fa-home"></i> Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add conditional styling to table rows
+            document.querySelectorAll("tr").forEach(function(row) {
+                const predictionCell = row.querySelector("td:nth-last-child(2)"); // Target second-to-last column
+                if (predictionCell && predictionCell.textContent.trim() === "1") {
+                    row.classList.add("highlight-red");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove "New_" prefix from table headers
+        const table = document.querySelector('table');
+        if (table) {
+            const headers = table.querySelectorAll('th');
+            headers.forEach(header => {
+                header.textContent = header.textContent.replace(/^New_/, '');
+            });
+        }
+    });
+</script>

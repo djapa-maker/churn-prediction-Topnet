@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5; /* Light background for a fresh look */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333; /* Dark text for contrast */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff; /* White card background for a clean look */
+            color: #333; /* Dark text in card */
+        }
+        .card-header {
+            background-color: #007bff; /* Bright blue header */
+            color: #ffffff;
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn-primary {
+            background-color: #28a745; /* Green button */
+            border: none;
+            border-radius: .25rem;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Gray button */
+            border: none;
+            border-radius: .25rem;
+            padding: 10px 20px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker gray on hover */
+        }
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #007bff; /* Blue accent */
+        }
+        .header p {
+            font-size: 1.125rem;
+            color: #6c757d; /* Gray text */
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-text {
+            font-size: 1.1rem;
+        }
+        .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        .btn {
+            font-size: 1rem;
+        }
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-home"></i> Churn Detection Topnet</h1>
+            <p>Upload your data files and view the results</p>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-upload icon"></i> Upload Data
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Upload your CSV files for data processing.</p>
+                        <a href="/upload" class="btn btn-primary">Upload Files</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line icon"></i> View Results
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">View the results of your data processing and analysis.</p>
+                        <a href="/" class="btn btn-primary">View Results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12 text-center">
+                <h2>Dashboard</h2>
+                <p>Access and manage your data analysis dashboard here.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-chart-bar icon"></i> Churn Predictions
+                            </div>
+                            <div class="card-body">
+                                {{ plot1|safe }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-chart-pie icon"></i> Feature Distribution
+                            </div>
+                            <div class="card-body">
+                                {{ plot2|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

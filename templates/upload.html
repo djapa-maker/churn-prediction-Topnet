@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data Files</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: #f0f4f7;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: .25rem;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            border-radius: .25rem;
+            padding: 10px 20px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-upload"></i> Upload Data Files</h1>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-file-upload"></i> Select Files
+            </div>
+            <div class="card-body">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="datafile">Select client data file:</label>
+                        <input type="file" class="form-control-file" name="datafile" id="datafile" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="datafacturefile">Select facture data file:</label>
+                        <input type="file" class="form-control-file" name="datafacturefile" id="datafacturefile" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/home" class="btn btn-secondary"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
