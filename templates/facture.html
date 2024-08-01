@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5; /* Light background for a fresh look */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333; /* Dark text for contrast */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #007bff; /* Blue accent */
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .table {
+            border-radius: 1rem;
+            background-color: #ffffff; /* White table background */
+            color: #333; /* Dark text in table */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .table thead th {
+            background-color: #007bff; /* Blue header for the table */
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .table tbody tr:nth-of-type(even) {
+            background-color: #f2f2f2; /* Light gray for even rows */
+        }
+        .table tbody tr:nth-of-type(odd) {
+            background-color: #ffffff; /* White for odd rows */
+        }
+        .btn-primary {
+            background-color: #28a745; /* Green button */
+            border: none;
+            border-radius: .25rem;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Gray button */
+            border: none;
+            border-radius: .25rem;
+            padding: 10px 20px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker gray on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-file-invoice"></i> Facture Details</h1>
+        </div>
+        {% if tables %}
+            <div class="table-container">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Facture Table
+                    </div>
+                    <div class="card-body">
+                        {{ tables|safe }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-center">No facture details to display.</p>
+        {% endif %}
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Client List</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove "New_" prefix from table headers
+        const table = document.querySelector('table');
+        if (table) {
+            const headers = table.querySelectorAll('th');
+            headers.forEach(header => {
+                header.textContent = header.textContent.replace(/^New_/, '');
+            });
+        }
+    });
+</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove "New_" prefix from table headers
+            const table = document.querySelector('table');
+            if (table) {
+                const headers = table.querySelectorAll('th');
+                headers.forEach(header => {
+                    header.textContent = header.textContent.replace(/^new_/, '');
+                });
+            }
+        });
+    </script>
